@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.0.0
+apiversion: 2
+architectures: armeabi armeabi-v7a x86
+description: test_ti_module_qq_login
+author: Siwei
+license: Specify your license
+copyright: Copyright (c) 2015 by Your Company
+
+# these should not be edited
+name: test_ti_module_qq_login
+moduleid: com.happysoft.login
+guid: 3078da53-3d0e-46aa-9dc5-94b6128e01f1
+platform: android
+minsdk: 3.5.0.GA
