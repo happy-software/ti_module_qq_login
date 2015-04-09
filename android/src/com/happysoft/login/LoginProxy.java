@@ -23,17 +23,18 @@ import org.appcelerator.titanium.view.TiUIView;
 import android.app.Activity;
 
 
-// This proxy can be created by calling TestTiModuleQqLogin.createExample({message: "hello world"})
+// This proxy can be created by calling TestTiModuleQqLogin.createLogin({message: "hello world"})
 @Kroll.proxy(creatableInModule=TestTiModuleQqLoginModule.class)
-public class ExampleProxy extends TiViewProxy
+public class LoginProxy extends TiViewProxy
 {
 	// Standard Debugging variables
-	private static final String LCAT = "ExampleProxy";
+	private static final String LCAT = "LoginProxy";
 	private static final boolean DBG = TiConfig.LOGD;
+  private String lala = "lalala";
 
-	private class ExampleView extends TiUIView
+	private class LoginView extends TiUIView
 	{
-		public ExampleView(TiViewProxy proxy) {
+		public LoginView(TiViewProxy proxy) {
 			super(proxy);
 			LayoutArrangement arrangement = LayoutArrangement.DEFAULT;
 
@@ -57,7 +58,7 @@ public class ExampleProxy extends TiViewProxy
 
 
 	// Constructor
-	public ExampleProxy()
+	public LoginProxy()
 	{
 		super();
 	}
@@ -65,7 +66,7 @@ public class ExampleProxy extends TiViewProxy
 	@Override
 	public TiUIView createView(Activity activity)
 	{
-		TiUIView view = new ExampleView(this);
+		TiUIView view = new LoginView(this);
 		view.getLayoutParams().autoFillsHeight = true;
 		view.getLayoutParams().autoFillsWidth = true;
 		return view;
@@ -93,12 +94,15 @@ public class ExampleProxy extends TiViewProxy
 	@Kroll.getProperty @Kroll.method
 	public String getMessage()
 	{
-        return "Hello World from my module";
+    return lala;
+        //return "Hello World from my module";
 	}
 
 	@Kroll.setProperty @Kroll.method
 	public void setMessage(String message)
 	{
-	    Log.d(LCAT, "Tried setting module message to: " + message);
+			//Log.d(LCAT, "Tried setting module message to: " + message);
+			Log.d(LCAT, "Tried setting module message to: " + lala);
+      lala = message;
 	}
 }
