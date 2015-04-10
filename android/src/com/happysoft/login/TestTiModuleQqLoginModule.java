@@ -30,17 +30,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import cn.sharesdk.demo.tpl.R;
-import cn.sharesdk.facebook.Facebook;
 import cn.sharesdk.framework.FakeActivity;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qzone.QZone;
-import cn.sharesdk.twitter.Twitter;
 import cn.sharesdk.wechat.friends.Wechat;
-import cn.smssdk.EventHandler;
-import cn.smssdk.SMSSDK;
 
 @Kroll.module(name="TestTiModuleQqLogin", id="com.happysoft.login")
 public class TestTiModuleQqLoginModule extends KrollModule
@@ -79,6 +75,7 @@ public class TestTiModuleQqLoginModule extends KrollModule
   }
 
 
+  @Kroll.method
   public void showWeixinLoginPage(){
     Platform wechat = ShareSDK.getPlatform(Wechat.NAME);
     authorize(wechat);
@@ -99,6 +96,8 @@ public class TestTiModuleQqLoginModule extends KrollModule
 			Message msg = new Message();
 			msg.what = MSG_AUTH_COMPLETE;
 			msg.obj = new Object[] {platform.getName(), res};
+      //System.out.println("=== complete: " + msg);
+      Log.d(LCAT, "=== complete: " + msg);
 			handler.sendMessage(msg);
 		}
 	}
@@ -106,6 +105,9 @@ public class TestTiModuleQqLoginModule extends KrollModule
 	public void onError(Platform platform, int action, Throwable t) {
 		if (action == Platform.ACTION_USER_INFOR) {
 			handler.sendEmptyMessage(MSG_AUTH_ERROR);
+      //System.out.println("=== error: " + MSG_AUTH_ERROR);
+      Log.d(LCAT, "error");
+      Log.d(LCAT, ""+t);
 		}
 		t.printStackTrace();
 	}
@@ -113,6 +115,8 @@ public class TestTiModuleQqLoginModule extends KrollModule
 	public void onCancel(Platform platform, int action) {
 		if (action == Platform.ACTION_USER_INFOR) {
 			handler.sendEmptyMessage(MSG_AUTH_CANCEL);
+      Log.d(LCAT, "canceled");
+      //System.out.println("=== cancel: " + MSG_AUTH_CANCEL);
 		}
 	}
   private String name;
